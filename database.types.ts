@@ -48,45 +48,6 @@ export type Database = {
           },
         ]
       }
-      feedbacks: {
-        Row: {
-          created_at: string
-          id: string
-          message: string
-          owner_email: string
-          owner_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          message: string
-          owner_email: string
-          owner_id?: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          message?: string
-          owner_email?: string
-          owner_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "feedbacks_owner_email_fkey"
-            columns: ["owner_email"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["email"]
-          },
-          {
-            foreignKeyName: "feedbacks_owner_id_fkey"
-            columns: ["owner_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       gcash_number_payment: {
         Row: {
           created_at: string
@@ -154,29 +115,29 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          order_id: string | null
-          price: number | null
-          product_id: string | null
-          quantity: number | null
-          shipping_fee: number | null
+          order_id: string
+          price: number
+          product_id: string
+          quantity: number
+          shipping_fee: number
         }
         Insert: {
           created_at?: string
           id?: string
-          order_id?: string | null
-          price?: number | null
-          product_id?: string | null
-          quantity?: number | null
-          shipping_fee?: number | null
+          order_id?: string
+          price: number
+          product_id?: string
+          quantity: number
+          shipping_fee: number
         }
         Update: {
           created_at?: string
           id?: string
-          order_id?: string | null
-          price?: number | null
-          product_id?: string | null
-          quantity?: number | null
-          shipping_fee?: number | null
+          order_id?: string
+          price?: number
+          product_id?: string
+          quantity?: number
+          shipping_fee?: number
         }
         Relationships: [
           {
@@ -198,12 +159,11 @@ export type Database = {
       orders: {
         Row: {
           address: string
-          completed_at: string | null
           contact_number: number
           created_at: string
           delivery_schedule: string | null
           delivery_status: Database["public"]["Enums"]["DELIVERY_STATUS"]
-          gcash_reference_number: string | null
+          gcash_reference_number: string
           id: string
           name: string
           payment_method: Database["public"]["Enums"]["PAYMENT_METHOD"]
@@ -214,12 +174,11 @@ export type Database = {
         }
         Insert: {
           address: string
-          completed_at?: string | null
           contact_number: number
           created_at?: string
           delivery_schedule?: string | null
           delivery_status?: Database["public"]["Enums"]["DELIVERY_STATUS"]
-          gcash_reference_number?: string | null
+          gcash_reference_number: string
           id?: string
           name: string
           payment_method: Database["public"]["Enums"]["PAYMENT_METHOD"]
@@ -230,12 +189,11 @@ export type Database = {
         }
         Update: {
           address?: string
-          completed_at?: string | null
           contact_number?: number
           created_at?: string
           delivery_schedule?: string | null
           delivery_status?: Database["public"]["Enums"]["DELIVERY_STATUS"]
-          gcash_reference_number?: string | null
+          gcash_reference_number?: string
           id?: string
           name?: string
           payment_method?: Database["public"]["Enums"]["PAYMENT_METHOD"]

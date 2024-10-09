@@ -41,9 +41,9 @@ export default function Conversations() {
             >
               <div className="text-left">
                 <div className="font-semibold">{item.email}</div>
-                <div className="text-sm text-muted-foreground truncate">
+                {/* <div className="text-sm text-muted-foreground truncate">
                   recent message here.
-                </div>
+                </div> */}
               </div>
             </button>
           ))}
