@@ -51,17 +51,17 @@ export type Database = {
       gcash_number_payment: {
         Row: {
           created_at: string
-          id: number
+          id: string
           number: string
         }
         Insert: {
           created_at?: string
-          id?: number
+          id?: string
           number: string
         }
         Update: {
           created_at?: string
-          id?: number
+          id?: string
           number?: string
         }
         Relationships: []
@@ -163,7 +163,7 @@ export type Database = {
           created_at: string
           delivery_schedule: string | null
           delivery_status: Database["public"]["Enums"]["DELIVERY_STATUS"]
-          gcash_reference_number: string
+          gcash_reference_number: string | null
           id: string
           name: string
           payment_method: Database["public"]["Enums"]["PAYMENT_METHOD"]
@@ -178,7 +178,7 @@ export type Database = {
           created_at?: string
           delivery_schedule?: string | null
           delivery_status?: Database["public"]["Enums"]["DELIVERY_STATUS"]
-          gcash_reference_number: string
+          gcash_reference_number?: string | null
           id?: string
           name: string
           payment_method: Database["public"]["Enums"]["PAYMENT_METHOD"]
@@ -193,7 +193,7 @@ export type Database = {
           created_at?: string
           delivery_schedule?: string | null
           delivery_status?: Database["public"]["Enums"]["DELIVERY_STATUS"]
-          gcash_reference_number?: string
+          gcash_reference_number?: string | null
           id?: string
           name?: string
           payment_method?: Database["public"]["Enums"]["PAYMENT_METHOD"]

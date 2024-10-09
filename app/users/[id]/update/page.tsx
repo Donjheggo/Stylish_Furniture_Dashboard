@@ -11,14 +11,12 @@ export default async function UpdateEvent({
   const user = await GetUserById(params.id);
 
   return (
-    <div>
+    <div className="p-4 lg:p-6">
       <Link href="/dashboard/users" className="flex gap-2 hover:underline">
         <ArrowLeft />
         Back
       </Link>
-      <h1 className="text-center text-2xl">
-        Update Role
-      </h1>
+      <h1 className="text-center text-2xl">Update Role</h1>
       <div className="mt-5">
         <UpdateUserForm item={user} />
       </div>
