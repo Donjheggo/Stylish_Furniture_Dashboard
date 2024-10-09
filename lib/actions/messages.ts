@@ -49,7 +49,8 @@ export async function GetUserMessageById(conversation_id: string) {
     const { data, error } = await supabase
       .from("messages")
       .select("*")
-      .eq("conversation_id", conversation_id);
+      .eq("conversation_id", conversation_id)
+      .order("created_at", { ascending: false });
 
     if (error) {
       return [];
