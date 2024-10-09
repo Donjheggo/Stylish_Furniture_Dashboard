@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/server";
 
 export async function GetAllMessages(admin_id: string) {
@@ -42,13 +43,13 @@ export async function GetAllUsers() {
   }
 }
 
-export async function GetUserMessageById(user_id: string) {
+export async function GetUserMessageById(conversation_id: string) {
   try {
     const supabase = createClient();
     const { data, error } = await supabase
       .from("messages")
       .select("*")
-      .eq("sender_id", user_id);
+      .eq("conversation_id", conversation_id);
 
     if (error) {
       return [];
@@ -57,5 +58,29 @@ export async function GetUserMessageById(user_id: string) {
     return data;
   } catch (error) {
     return [];
+  }
+}
+
+export async function SendMessage(formData: FormData) {
+  try {
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("messages")
+      .insert([
+        {
+          sender_id: formData.get("sender_id"),
+          receiver_id: formData.get("receiver_id"),
+          message: formData.get("message"),
+          conversation_id: formData.get("conversation_id"),
+        },
+      ])
+      .select();
+    if (error) {
+      return false;
+    }
+    revalidatePath("/message");
+    return true;
+  } catch (error) {
+    return false;
   }
 }

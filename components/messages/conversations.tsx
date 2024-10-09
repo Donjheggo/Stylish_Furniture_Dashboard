@@ -37,7 +37,7 @@ export default function Conversations() {
             <button
               key={index}
               onClick={() => handleOpenChat(item.id)}
-              className={`flex items-center gap-3 w-full p-3 hover:bg-muted transition-colors`}
+              className={`border-b flex items-center gap-3 w-full p-3 hover:bg-muted transition-colors`}
             >
               <div className="text-left">
                 <div className="font-semibold">{item.email}</div>

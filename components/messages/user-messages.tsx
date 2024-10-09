@@ -1,6 +1,9 @@
 import { Card, CardHeader, CardTitle } from "../ui/card";
 import { ScrollArea } from "../ui/scroll-area";
 import { GetUserMessageById } from "@/lib/actions/messages";
+import { createClient } from "@/lib/supabase/server";
+import { FormatDateTimeAgo } from "@/lib/utils";
+import { GetUserById } from "@/lib/actions/users";
 
 export default async function UserMessages({ user_id }: { user_id: string }) {
   if (!user_id) {
@@ -10,15 +13,18 @@ export default async function UserMessages({ user_id }: { user_id: string }) {
       </div>
     );
   }
-
-  const messages = await GetUserMessageById(user_id);
+  const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+  const conversation_id = `${user_id}${data.user?.id}`;
+  const messages = await GetUserMessageById(conversation_id);
+  const userData = await GetUserById(user_id)
 
   return (
     <>
       {/* Chat header */}
       <Card className="rounded-none border-b border-t-0 border-l-0 border-r-0">
         <CardHeader className="py-3">
-          <CardTitle className="text-lg">Email here</CardTitle>
+          <CardTitle className="text-lg">{userData.email}</CardTitle>
         </CardHeader>
       </Card>
 
@@ -39,7 +45,9 @@ export default async function UserMessages({ user_id }: { user_id: string }) {
               }`}
             >
               <p>{item.message}</p>
-              <p className="text-xs mt-1 opacity-70">{item.created_at}</p>
+              <p className="text-xs mt-1 opacity-70">
+                {FormatDateTimeAgo(new Date(item.created_at))}
+              </p>
             </div>
           </div>
         ))}

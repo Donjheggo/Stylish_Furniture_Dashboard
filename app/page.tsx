@@ -38,7 +38,7 @@ export default async function Dashboard() {
   ];
 
   return (
-    <div className="container mx-auto max-w-screen-2xl">
+    <div className="container mx-auto max-w-screen-2xl p-4 lg:p-6">
       <h1 className="text-center text-2xl">Dashboard</h1>
       <div className="grid gap-4 grid-cols-2 md:grid-cols-2 xl:grid-cols-4 mt-4">
         {cards.map((item, index) => (

@@ -20,7 +20,7 @@ export default function Messages({
         <UserMessages user_id={user_id} />
 
         {/* Message input */}
-        {user_id && <SendMessageForm />}
+        {user_id && <SendMessageForm user_id={user_id}/>}
       </div>
     </div>
   );

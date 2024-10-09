@@ -5,7 +5,6 @@ import {
   HandCoins,
   Armchair,
   ShoppingCart,
-  MessageSquareQuote,
   MessageSquareMore,
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
@@ -82,11 +81,6 @@ export const adminLinks = [
     name: "Orders",
     href: "/orders",
     icon: <ShoppingCart />,
-  },
-  {
-    name: "Feedbacks",
-    href: "/feedbacks",
-    icon: <MessageSquareQuote />,
   },
   {
     name: "Messages",
