@@ -80,8 +80,6 @@ export async function GetUserById(id: string) {
     if (error) {
       return false;
     }
-    revalidatePath("/users");
-    revalidatePath("/dashboard/users");
     return data;
   } catch (error) {
     return false;
