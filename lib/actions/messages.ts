@@ -29,7 +29,8 @@ export async function GetAllUsers() {
     const { error, data } = await supabase
       .from("users")
       .select("*")
-      .eq("role", "USER");
+      .eq("role", "USER")
+      .order("email", { ascending: true });
 
     if (error) {
       console.error(error.message);
