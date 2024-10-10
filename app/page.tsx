@@ -7,7 +7,6 @@ import {
   GetCompletedOrders,
 } from "@/lib/actions/orders";
 import OrdersTable from "@/components/dashboard/orders-table";
-import ProductsTable from "@/components/dashboard/products-table";
 
 export default async function Dashboard() {
   const [products, pending, delivery, completed] = await Promise.all([

@@ -17,7 +17,7 @@ export default function Messages({
 
       {/* Main chat area */}
       <div className="flex-1 flex flex-col">
-        <UserMessages user_id={user_id} />
+        {user_id && <UserMessages user_id={user_id} />}
 
         {/* Message input */}
         {user_id && <SendMessageForm user_id={user_id}/>}

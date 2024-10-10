@@ -6,18 +6,11 @@ import { GetUserMessageById } from "@/lib/actions/messages";
 import { createClient } from "@/lib/supabase/client";
 import { FormatDateTimeAgo } from "@/lib/utils";
 import { GetUserById } from "@/lib/actions/users";
-import type { MessagesT } from "@/app/messages/page";
 import { useState, useEffect } from "react";
 import { useUser } from "@/context/user-context";
+import type { MessagesT } from "@/app/messages/page";
 
 export default function UserMessages({ user_id }: { user_id: string }) {
-  if (!user_id) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p>No user selected. Please select a conversation.</p>
-      </div>
-    );
-  }
   const supabase = createClient();
   const { loading, user: myData } = useUser();
   const [userEmail, setUserEmail] = useState<string>();
@@ -57,6 +50,8 @@ export default function UserMessages({ user_id }: { user_id: string }) {
       subscription.unsubscribe();
     };
   }, [user_id, myData]);
+
+  if (loading) return;
 
   return (
     <>
