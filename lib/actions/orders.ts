@@ -127,3 +127,64 @@ export async function GetItemsByOrderId(order_id: string) {
     return [];
   }
 }
+
+export async function GetPendingOrders() {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .eq("delivery_status", "PENDING");
+
+    if (error) {
+      console.error(error);
+      return 0;
+    }
+
+    return data.length || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}
+
+export async function GetDeliveryOrders() {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .eq("delivery_status", "OUT FOR DELIVERY");
+
+    if (error) {
+      console.error(error);
+      return 0;
+    }
+
+    return data.length || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}
+
+export async function GetCompletedOrders() {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .eq("delivery_status", "COMPLETED");
+
+    if (error) {
+      console.error(error);
+      return 0;
+    }
+
+    return data.length || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}
+

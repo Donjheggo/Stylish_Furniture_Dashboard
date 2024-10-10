@@ -1,39 +1,42 @@
 import DashboardCard from "@/components/dashboard/dashboard-card";
-import { Droplets, ScrollText, HandCoins } from "lucide-react";
-// import { GetTotalClients } from "@/lib/actions/clients";
-// import { GetAllUpaidBills, GetAllPaidBills } from "@/lib/actions/bills";
-// import { GetTotalPayments } from "@/lib/actions/payments";
-// import BillsTable from "@/components/dashboard/bills-table";
-// import PaymentsTable from "@/components/dashboard/payments-table";
+import { Armchair, ShoppingCart, Truck, Loader } from "lucide-react";
+import { GetTotalProducts } from "@/lib/actions/products";
+import {
+  GetPendingOrders,
+  GetDeliveryOrders,
+  GetCompletedOrders,
+} from "@/lib/actions/orders";
+import OrdersTable from "@/components/dashboard/orders-table";
+import ProductsTable from "@/components/dashboard/products-table";
 
 export default async function Dashboard() {
-  // const [clients, unpaids, paids, payments] = await Promise.all([
-  //   GetTotalClients(),
-  //   GetAllUpaidBills(),
-  //   GetAllPaidBills(),
-  //   GetTotalPayments(),
-  // ]);
+  const [products, pending, delivery, completed] = await Promise.all([
+    GetTotalProducts(),
+    GetPendingOrders(),
+    GetDeliveryOrders(),
+    GetCompletedOrders(),
+  ]);
 
   const cards = [
     {
-      title: "Total Clients",
-      number: 2,
-      icon: <Droplets size={25} className="text-primary" />,
+      title: "Total Products",
+      number: products,
+      icon: <Armchair size={25} className="text-primary" />,
     },
     {
-      title: "Total Paid Bills",
-      number: 2,
-      icon: <ScrollText size={25} className="text-primary" />,
+      title: "Pending Orders",
+      number: pending,
+      icon: <Loader size={25} className="text-primary" />,
     },
     {
-      title: "Total Unpaid Bills",
-      number: 2,
-      icon: <ScrollText size={25} className="text-primary" />,
+      title: "Out For Delivery Orders",
+      number: delivery,
+      icon: <Truck size={25} className="text-primary" />,
     },
     {
-      title: "Total Payments",
-      number: 3,
-      icon: <HandCoins size={25} className="text-primary" />,
+      title: "Total Orders",
+      number: completed,
+      icon: <ShoppingCart size={25} className="text-primary" />,
     },
   ];
 
@@ -47,10 +50,7 @@ export default async function Dashboard() {
       </div>
       <div className="flex flex-1 flex-col lg:flex-row gap-4 mt-4">
         <div className="w-full">
-          {/* <BillsTable searchQuery="" page={1} /> */}
-        </div>
-        <div className="w-full lg:w-[50%]">
-          {/* <PaymentsTable searchQuery="" page={1} /> */}
+          <OrdersTable searchQuery="" page={1} />
         </div>
       </div>
     </div>
