@@ -33,7 +33,7 @@ export default async function Dashboard() {
       icon: <Truck size={25} className="text-primary" />,
     },
     {
-      title: "Total Orders",
+      title: "Total Completed Orders",
       number: completed,
       icon: <ShoppingCart size={25} className="text-primary" />,
     },
