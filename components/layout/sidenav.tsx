@@ -6,6 +6,7 @@ import {
   Armchair,
   ShoppingCart,
   MessageSquareMore,
+  NotepadText
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { signout } from "@/lib/actions/auth";
@@ -76,6 +77,11 @@ export const adminLinks = [
     name: "Products",
     href: "/products",
     icon: <Armchair />,
+  },
+  {
+    name: "Reviews",
+    href: "/reviews",
+    icon: <NotepadText />,
   },
   {
     name: "Orders",
