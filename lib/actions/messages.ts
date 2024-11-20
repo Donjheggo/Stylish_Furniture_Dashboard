@@ -86,3 +86,22 @@ export async function SendMessage(formData: FormData) {
     return false;
   }
 }
+
+export async function GetTotalMessages() {
+  try {
+    const supabase = createClient();
+    const { error, count } = await supabase
+      .from("messages")
+      .select("id", { count: "exact" });
+
+    if (error) {
+      console.error(error.message);
+      return 0;
+    }
+
+    return count || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}

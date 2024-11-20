@@ -6,13 +6,17 @@ import {
   Armchair,
   ShoppingCart,
   MessageSquareMore,
-  NotepadText
+  NotepadText,
+  Truck,
+  Loader,
+  Check,
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { signout } from "@/lib/actions/auth";
 import Link from "next/link";
 import Image from "next/image";
 import favicon from "@/app/favicon.ico";
+import Submenus from "./sub-menus";
 
 export default function Sidenav() {
   return (
@@ -32,16 +36,20 @@ export default function Sidenav() {
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
                 Admin
               </p>
-              {adminLinks.map((item, index) => (
-                <Link
-                  href={item.href}
-                  key={index}
-                  className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
-                >
-                  {item.icon}
-                  <h1 className="text-md">{item.name}</h1>
-                </Link>
-              ))}
+              {adminLinks.map((item, index) =>
+                item.children ? (
+                  <Submenus key={index} item={item} />
+                ) : (
+                  <Link
+                    href={item.href}
+                    key={index}
+                    className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
+                  >
+                    {item.icon}
+                    <h1 className="text-md">{item.name}</h1>
+                  </Link>
+                )
+              )}
             </div>
             <div className="mt-2">
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
@@ -87,6 +95,23 @@ export const adminLinks = [
     name: "Orders",
     href: "/orders",
     icon: <ShoppingCart />,
+    children: [
+      {
+        name: "Pending",
+        href: "/orders/pending",
+        icon: <Loader />,
+      },
+      {
+        name: "Out for Delivery",
+        href: "/orders/out-for-delivery",
+        icon: <Truck />,
+      },
+      {
+        name: "Completed",
+        href: "/orders/completed",
+        icon: <Check />,
+      },
+    ],
   },
   {
     name: "Messages",

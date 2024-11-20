@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { adminLinks } from "./sidenav";
 import { signout } from "@/lib/actions/auth";
 import Link from "next/link";
+import Submenus from "./sub-menus";
 
 export default function Header() {
   return (
@@ -32,16 +33,20 @@ export default function Header() {
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
                 Admin
               </p>
-              {adminLinks.map((item, index) => (
-                <Link
-                  href={item.href}
-                  key={index}
-                  className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
-                >
-                  {item.icon}
-                  <h1 className="text-md">{item.name}</h1>
-                </Link>
-              ))}
+              {adminLinks.map((item, index) =>
+                item.children ? (
+                  <Submenus key={index} item={item} />
+                ) : (
+                  <Link
+                    href={item.href}
+                    key={index}
+                    className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
+                  >
+                    {item.icon}
+                    <h1 className="text-md">{item.name}</h1>
+                  </Link>
+                )
+              )}
             </div>
 
             <div className="mt-2">
